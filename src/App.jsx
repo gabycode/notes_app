@@ -1,31 +1,31 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [notes, setNotes] = useState([]);
+
+  console.log(notes);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank"></a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <div className="left-sidebar">
+        <form className="add-note">
+          <input
+            type="text"
+            placeholder="Write a title"
+            className="note-title"
+          />
+          <textarea placeholder="Write here..." className="note-body" />
+          <button type="submit">Add note</button>
+        </form>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="notes-ui">
+        <div className="notes-container">
+          <h2>Hello</h2>
+          <p>This is a note</p>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 
