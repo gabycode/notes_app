@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import trashcan from "./assets/trashcan.svg";
 
 function App() {
   const [noteTitle, setNoteTitle] = useState("");
@@ -9,6 +10,7 @@ function App() {
   const addNote = (e) => {
     e.preventDefault();
     const newNote = {
+      id: notesList.length,
       title: noteTitle,
       body: noteBody,
     };
@@ -16,6 +18,13 @@ function App() {
     setNoteTitle("");
     setNoteBody("");
   };
+
+  const deleteNote = (noteId) => {
+    const updatedNotes = notesList.filter((note) => note.id !== noteId);
+    setNotesList(updatedNotes);
+    console.log(notesList);
+  };
+  console.log(notesList);
 
   return (
     <div className="app">
@@ -39,12 +48,20 @@ function App() {
       </div>
       <div className="notes-ui">
         <div className="notes-container">
-          {notesList.toReversed().map((note, id) => (
-            <div key={id} className="note">
-              <h2>{note.title}</h2>
-              <p>{note.body}</p>
-            </div>
-          ))}
+          {notesList
+            .slice()
+            .reverse()
+            .map((note, id) => (
+              <div key={id} className="note">
+                <h2>{note.title}</h2>
+                <p>{note.body}</p>
+                <img
+                  src={trashcan}
+                  className="trash-icon"
+                  onClick={() => deleteNote(note.id)}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>
